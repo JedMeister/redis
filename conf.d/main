@@ -1,18 +1,9 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 NODEUSER=node
-#chown -R node:node /usr/local/lib/node_modules/
-#chown -R node:node /usr/local/bin/
-su - node -c 'cd /opt/tklweb-cp && npm install redis-commander'
-#chown -R root:staff /usr/local/lib/node_modules/
-#chown -R root:staff /usr/local/bin/
 
-su -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && npm i redis-commander" $NODEUSER
-su -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && pm2 start ecosystem.config.js && sleep 20 && pm2 save && pm2 kill" $NODEUSER
-
-#useradd --system -m -s /bin/false nodejs
-#useradd --system -d /home/nodejs -G nodejs -s /bin/false redis-commander
-#chmod g+w /home/nodejs
+su -lc "[[ "$FAB_HTTP_PROXY" ]] && export http_proxy=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && npm i redis-commander" $NODEUSER
+su -lc "[[ "$FAB_HTTP_PROXY" ]] && export http_proxy=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && pm2 start ecosystem.config.js && sleep 20 && pm2 save && pm2 kill" $NODEUSER
 
 rm /etc/nginx/sites-enabled/tkl-default
 ln -s /etc/nginx/sites-available/redis /etc/nginx/sites-enabled/redis
