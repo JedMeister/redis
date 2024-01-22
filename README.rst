@@ -16,13 +16,26 @@ and on top of that:
 - Redis configurations:
 
     - Installed from debian package repository (auto security updates).
-    - Includes web based management tool `Redis-commander`_.
+    - Includes web based management tool `Redis Commander`_.
     - Complex Redis system password auto-generated on firstboot (security).
     - Confconsole plugin provided to view Redis system password (convenience).
+
+   **Security note**: Updates to `Redis Commander`_ may require supervision so
+   they **ARE NOT** configured to install automatically. See `Plone
+   documentation`_ for upgrading.
 
 - SSL support out of the box.
 - Postfix MTA (bound to localhost) to allow sending of email from web
   applications (e.g., password recovery).
+
+Supervised Manual Redis Commander Update
+----------------------------------------
+
+Always ensure that you have a current and tested backup before performing an
+upgrade. Ideally also do a test upgrade proceedure on a development server,
+before updating your production server.::
+
+    su - node -c "cd /opt/tklweb-cp && npm update"
 
 Credentials *(passwords set at first boot)*
 -------------------------------------------
@@ -35,4 +48,4 @@ Credentials *(passwords set at first boot)*
 .. _redis-sentinel: https://packages.debian.org/stretch/redis-sentinel
 .. _Redis Cluster: https://redis.io/topics/cluster-tutorial
 .. _TurnKey Core: https://www.turnkeylinux.org/core
-.. _Redis-commander: https://github.com/joeferner/redis-commander
+.. _Redis Commander: https://joeferner.github.io/redis-commander/
